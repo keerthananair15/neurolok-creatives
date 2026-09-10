@@ -50,7 +50,7 @@ function hash(text: string): number {
 
 /** Deterministic sample pick — safe at module and render time. */
 export function sampleFor(seed: string, index = 0): string {
-  return SAMPLE_MEDIA[(hash(seed) + index * 3) % SAMPLE_MEDIA.length] ?? SAMPLE_MEDIA[0]!;
+  return SAMPLE_MEDIA[(hash(seed) + index) % SAMPLE_MEDIA.length] ?? SAMPLE_MEDIA[0]!;
 }
 
 /** The "prompt enhancement layer" preview shown behind Details. */
