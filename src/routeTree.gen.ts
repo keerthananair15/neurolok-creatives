@@ -17,7 +17,9 @@ import { Route as AuthenticatedCharactersRouteImport } from './routes/_authentic
 import { Route as AuthenticatedCreateRouteImport } from './routes/_authenticated/create'
 import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
 import { Route as AuthenticatedLibraryRouteImport } from './routes/_authenticated/library'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedStoryboardRouteImport } from './routes/_authenticated/storyboard'
+import { Route as AuthenticatedTrendsRouteImport } from './routes/_authenticated/trends'
 import { Route as AuthenticatedAssetAssetIdRouteImport } from './routes/_authenticated/asset.$assetId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -59,9 +61,19 @@ const AuthenticatedLibraryRoute = AuthenticatedLibraryRouteImport.update({
   path: '/library',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedStoryboardRoute = AuthenticatedStoryboardRouteImport.update({
   id: '/storyboard',
   path: '/storyboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTrendsRoute = AuthenticatedTrendsRouteImport.update({
+  id: '/trends',
+  path: '/trends',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedAssetAssetIdRoute =
@@ -79,7 +91,9 @@ export interface FileRoutesByFullPath {
   '/create': typeof AuthenticatedCreateRoute
   '/home': typeof AuthenticatedHomeRoute
   '/library': typeof AuthenticatedLibraryRoute
+  '/settings': typeof AuthenticatedSettingsRoute
   '/storyboard': typeof AuthenticatedStoryboardRoute
+  '/trends': typeof AuthenticatedTrendsRoute
   '/asset/$assetId': typeof AuthenticatedAssetAssetIdRoute
 }
 export interface FileRoutesByTo {
@@ -90,7 +104,9 @@ export interface FileRoutesByTo {
   '/create': typeof AuthenticatedCreateRoute
   '/home': typeof AuthenticatedHomeRoute
   '/library': typeof AuthenticatedLibraryRoute
+  '/settings': typeof AuthenticatedSettingsRoute
   '/storyboard': typeof AuthenticatedStoryboardRoute
+  '/trends': typeof AuthenticatedTrendsRoute
   '/asset/$assetId': typeof AuthenticatedAssetAssetIdRoute
 }
 export interface FileRoutesById {
@@ -103,7 +119,9 @@ export interface FileRoutesById {
   '/_authenticated/create': typeof AuthenticatedCreateRoute
   '/_authenticated/home': typeof AuthenticatedHomeRoute
   '/_authenticated/library': typeof AuthenticatedLibraryRoute
+  '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/storyboard': typeof AuthenticatedStoryboardRoute
+  '/_authenticated/trends': typeof AuthenticatedTrendsRoute
   '/_authenticated/asset/$assetId': typeof AuthenticatedAssetAssetIdRoute
 }
 export interface FileRouteTypes {
@@ -116,7 +134,9 @@ export interface FileRouteTypes {
     | '/create'
     | '/home'
     | '/library'
+    | '/settings'
     | '/storyboard'
+    | '/trends'
     | '/asset/$assetId'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -127,7 +147,9 @@ export interface FileRouteTypes {
     | '/create'
     | '/home'
     | '/library'
+    | '/settings'
     | '/storyboard'
+    | '/trends'
     | '/asset/$assetId'
   id:
     | '__root__'
@@ -139,7 +161,9 @@ export interface FileRouteTypes {
     | '/_authenticated/create'
     | '/_authenticated/home'
     | '/_authenticated/library'
+    | '/_authenticated/settings'
     | '/_authenticated/storyboard'
+    | '/_authenticated/trends'
     | '/_authenticated/asset/$assetId'
   fileRoutesById: FileRoutesById
 }
@@ -207,11 +231,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedLibraryRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/storyboard': {
       id: '/_authenticated/storyboard'
       path: '/storyboard'
       fullPath: '/storyboard'
       preLoaderRoute: typeof AuthenticatedStoryboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/trends': {
+      id: '/_authenticated/trends'
+      path: '/trends'
+      fullPath: '/trends'
+      preLoaderRoute: typeof AuthenticatedTrendsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/asset/$assetId': {
@@ -230,7 +268,9 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCreateRoute: typeof AuthenticatedCreateRoute
   AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
   AuthenticatedLibraryRoute: typeof AuthenticatedLibraryRoute
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedStoryboardRoute: typeof AuthenticatedStoryboardRoute
+  AuthenticatedTrendsRoute: typeof AuthenticatedTrendsRoute
   AuthenticatedAssetAssetIdRoute: typeof AuthenticatedAssetAssetIdRoute
 }
 
@@ -240,7 +280,9 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCreateRoute: AuthenticatedCreateRoute,
   AuthenticatedHomeRoute: AuthenticatedHomeRoute,
   AuthenticatedLibraryRoute: AuthenticatedLibraryRoute,
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedStoryboardRoute: AuthenticatedStoryboardRoute,
+  AuthenticatedTrendsRoute: AuthenticatedTrendsRoute,
   AuthenticatedAssetAssetIdRoute: AuthenticatedAssetAssetIdRoute,
 }
 
