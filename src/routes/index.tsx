@@ -1,24 +1,37 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { supabase } from "@/integrations/supabase/client";
+import { Logo } from "@/components/neurolok/logo";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  ssr: false,
+  head: () => ({
+    meta: [
+      { title: "Neurolok — Turn an idea into finished creative" },
+      {
+        name: "description",
+        content:
+          "Neurolok is an AI creative studio for images, videos, storyboards, characters and ad campaigns — described in plain language.",
+      },
+      { property: "og:title", content: "Neurolok — AI Creative Studio" },
+      { property: "og:description", content: "Bring an idea. Leave with finished work." },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      navigate({ to: data.user ? "/home" : "/auth", replace: true });
+    });
+  }, [navigate]);
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="ambient-glow flex min-h-screen items-center justify-center bg-background">
+      <Logo size={44} />
     </div>
   );
 }
