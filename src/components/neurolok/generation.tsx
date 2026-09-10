@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { STAGES } from "@/lib/studio";
 import { Progress } from "@/components/ui/progress";
 
@@ -27,10 +27,19 @@ export function GenerationStages({ label = "Creating" }: { label?: string }) {
 
 export function useSimulatedRun(ms = 3600) {
   const [running, setRunning] = useState(false);
+  const mounted = useRef(true);
+
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
+
   const run = async <T,>(work: () => Promise<T>): Promise<T> => {
-    setRunning(true);
+    if (mounted.current) setRunning(true);
     const [result] = await Promise.all([work(), new Promise((r) => setTimeout(r, ms))]);
-    setRunning(false);
+    if (mounted.current) setRunning(false);
     return result;
   };
   return { running, run };
