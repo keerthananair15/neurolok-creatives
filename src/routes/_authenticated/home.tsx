@@ -142,14 +142,16 @@ function HomePage() {
               <div className="flex flex-1 flex-col justify-between p-5">
                 <div>
                   <Icon className="size-[18px] text-primary" strokeWidth={1.6} />
-                  <p className="mt-3 font-display text-base text-foreground">{label}</p>
+                  <p className="mt-3 whitespace-nowrap font-display text-[0.95rem] text-foreground">
+                    {label}
+                  </p>
                   <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{hint}</p>
                 </div>
                 <span className="mt-5 inline-flex size-8 items-center justify-center rounded-full border border-border/70 text-muted-foreground transition-all duration-300 group-hover:border-primary/50 group-hover:text-primary">
                   <ArrowRight className="size-4" />
                 </span>
               </div>
-              <div className="relative w-[38%] shrink-0 overflow-hidden">
+              <div className="relative w-[32%] shrink-0 overflow-hidden">
                 <img
                   src={SAMPLE_MEDIA[art]}
                   alt=""
@@ -157,9 +159,10 @@ function HomePage() {
                   loading="lazy"
                   className="h-full w-full object-cover opacity-70 transition-all duration-700 group-hover:scale-105 group-hover:opacity-90"
                 />
-                <span className="absolute inset-0 bg-gradient-to-r from-card via-card/30 to-transparent" />
+                <span className="absolute inset-0 bg-gradient-to-r from-card via-card/40 to-transparent" />
               </div>
             </div>
+
           </Link>
         ))}
       </div>
