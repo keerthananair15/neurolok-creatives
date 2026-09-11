@@ -63,7 +63,7 @@ export function Composer({
   );
 
   return (
-    <div className="glass-strong rounded-3xl p-3 sm:p-4">
+    <div className="glass-strong edge-light rounded-3xl p-3 shadow-[0_30px_80px_-50px_oklch(0_0_0/90%)] transition-all duration-500 focus-within:border-primary/30 focus-within:glow-ring sm:p-4">
       <Textarea
         value={value.idea}
         onChange={(e) => set({ idea: e.target.value })}
