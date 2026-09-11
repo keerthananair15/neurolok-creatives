@@ -73,7 +73,14 @@ function SidebarBody({ onNavigate }: { onNavigate?: (() => void) | undefined }) 
       <NavLinks onNavigate={onNavigate} />
 
       <div className="mt-auto flex flex-col gap-3">
+        <div className="card-premium px-3.5 py-3">
+          <p className="font-display text-lg text-foreground">
+            {(profile?.credits ?? 0).toLocaleString()}
+          </p>
+          <p className="text-[11px] text-muted-foreground">Credits left</p>
+        </div>
         <AskSuggestion />
+
         <Link
           to="/settings"
           onClick={onNavigate}

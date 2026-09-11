@@ -15,7 +15,7 @@ export function MediaTile({
     <button
       onClick={onClick}
       className={cn(
-        "group relative w-full overflow-hidden rounded-2xl border border-border/50 bg-card text-left transition-all duration-300 hover:border-primary/40 hover:glow-ring",
+        "group relative w-full overflow-hidden rounded-3xl border border-border/50 bg-card text-left transition-all duration-500 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:border-primary/40 hover:glow-ring",
         className,
       )}
     >
@@ -23,14 +23,15 @@ export function MediaTile({
         src={asset.media_url}
         alt={asset.prompt ?? "Generated media"}
         loading="lazy"
-        className="aspect-[4/5] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+        className="aspect-[4/5] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
       />
+      <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent opacity-70" />
       {asset.kind === "video" && (
-        <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-background/70 px-2.5 py-1 text-[11px] text-foreground backdrop-blur-md">
+        <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-background/60 px-2.5 py-1 text-[11px] text-foreground backdrop-blur-md">
           <Play className="size-3 fill-primary text-primary" /> Video
         </span>
       )}
-      <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/95 to-transparent p-3 pt-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+      <span className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 bg-gradient-to-t from-background/95 to-transparent p-3 pt-10 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
         <span className="line-clamp-2 text-xs text-muted-foreground">{asset.prompt}</span>
       </span>
     </button>
@@ -44,6 +45,7 @@ export function MediaGrid({ children, className }: { children: React.ReactNode; 
     </div>
   );
 }
+
 
 export function EmptyState({
   title,
