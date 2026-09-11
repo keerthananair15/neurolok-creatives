@@ -53,22 +53,20 @@ function HeroStack() {
     <div className="relative hidden h-[420px] lg:block" aria-hidden>
       <div className="pointer-events-none absolute -right-10 top-4 size-[420px] rounded-full bg-[radial-gradient(closest-side,var(--glow),transparent)] blur-2xl" />
 
-      <figure className="absolute left-4 top-14 w-[46%] rotate-[-4deg] overflow-hidden rounded-3xl border border-white/10 opacity-70 shadow-[0_30px_80px_-40px_oklch(0_0_0/80%)] transition-transform duration-700 hover:rotate-[-2deg]">
+      <figure className="absolute left-0 top-6 w-[44%] rotate-[-4deg] overflow-hidden rounded-3xl border border-white/10 opacity-70 shadow-[0_30px_80px_-40px_oklch(0_0_0/80%)] transition-transform duration-700 hover:rotate-[-2deg]">
         <img src={SAMPLE_MEDIA[2]} alt="" className="aspect-[3/4] w-full object-cover" loading="lazy" />
       </figure>
 
-      <figure className="absolute right-4 top-0 w-[58%] overflow-hidden rounded-[2rem] border border-white/12 shadow-[0_50px_120px_-50px_oklch(0.84_0.21_150/45%)]">
+      <figure className="absolute right-0 top-0 w-[56%] overflow-hidden rounded-[2rem] border border-white/12 shadow-[0_50px_120px_-50px_oklch(0.84_0.21_150/45%)]">
         <img src={SAMPLE_MEDIA[1]} alt="" className="aspect-[4/5] w-full object-cover" loading="lazy" />
         <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/95 to-transparent p-5 pt-16">
           <p className="font-display text-xs uppercase leading-5 tracking-[0.32em] text-foreground/90">
-            Visions
-            <br />
-            without limits
+            Visions without limits
           </p>
         </figcaption>
       </figure>
 
-      <figure className="glass absolute bottom-0 right-16 w-[42%] overflow-hidden rounded-3xl p-1.5">
+      <figure className="glass absolute bottom-2 left-2 w-[46%] overflow-hidden rounded-3xl p-1.5">
         <img
           src={SAMPLE_MEDIA[4]}
           alt=""
@@ -79,6 +77,7 @@ function HeroStack() {
           <Play className="size-3 fill-primary text-primary" /> 0:08
         </span>
       </figure>
+
     </div>
   );
 }
