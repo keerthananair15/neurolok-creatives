@@ -92,7 +92,7 @@ function HomePage() {
     : SAMPLE_MEDIA.slice(0, 4).map((media_url, index) => ({
         id: `sample-${index}`,
         media_url,
-        prompt: null,
+        prompt: "Neurolok sample creation",
         kind: index === 0 ? ("video" as const) : ("image" as const),
       }));
 
@@ -203,7 +203,7 @@ function HomePage() {
           {recentCreations.map((asset, index) => {
             const isSample = asset.id.startsWith("sample-");
             return (
-              <div key={asset.id} className="creation-item" style={{ animationDelay: `${index * 70}ms` }}>
+              <div key={asset.id} className="creation-item">
                 <MediaTile
                   asset={asset}
                   onClick={
