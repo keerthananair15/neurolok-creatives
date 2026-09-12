@@ -90,11 +90,11 @@ function HomePage() {
   const recentCreations = recent?.length
     ? recent
     : SAMPLE_MEDIA.slice(0, 4).map((media_url, index) => ({
-        id: `sample-${index}`,
-        media_url,
-        prompt: "Neurolok sample creation",
-        kind: index === 0 ? ("video" as const) : ("image" as const),
-      }));
+      id: `sample-${index}`,
+      media_url,
+      prompt: "Neurolok sample creation",
+      kind: index === 0 ? ("video" as const) : ("image" as const),
+    }));
 
   const first = profile?.display_name?.split(" ")[0];
 
