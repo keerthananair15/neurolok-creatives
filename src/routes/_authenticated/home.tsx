@@ -87,6 +87,14 @@ function HomePage() {
   const [value, setValue] = useState(emptyComposer);
   const { data: profile } = useProfile();
   const { data: recent } = useAssets({ limit: 8 });
+  const recentCreations = recent?.length
+    ? recent
+    : SAMPLE_MEDIA.slice(0, 4).map((media_url, index) => ({
+        id: `sample-${index}`,
+        media_url,
+        prompt: "Neurolok sample creation",
+        kind: index === 0 ? ("video" as const) : ("image" as const),
+      }));
 
   const first = profile?.display_name?.split(" ")[0];
 
@@ -179,30 +187,36 @@ function HomePage() {
         ))}
       </div>
 
-      {!!recent?.length && (
-        <>
-          <SectionHeading
-            title="Recent creations"
-            right={
-              <Link
-                to="/library"
-                className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline"
-              >
-                View all <ArrowRight className="size-4" />
-              </Link>
-            }
-          />
-          <MediaGrid>
-            {recent.map((a) => (
-              <MediaTile
-                key={a.id}
-                asset={a}
-                onClick={() => navigate({ to: "/asset/$assetId", params: { assetId: a.id } })}
-              />
-            ))}
-          </MediaGrid>
-        </>
-      )}
+      <section className="creation-reveal">
+        <SectionHeading
+          title="Recent creations"
+          right={
+            <Link
+              to="/library"
+              className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline"
+            >
+              View all <ArrowRight className="size-4" />
+            </Link>
+          }
+        />
+        <MediaGrid>
+          {recentCreations.map((asset, index) => {
+            const isSample = asset.id.startsWith("sample-");
+            return (
+              <div key={asset.id} className="creation-item">
+                <MediaTile
+                  asset={asset}
+                  onClick={
+                    isSample
+                      ? () => navigate({ to: "/create" })
+                      : () => navigate({ to: "/asset/$assetId", params: { assetId: asset.id } })
+                  }
+                />
+              </div>
+            );
+          })}
+        </MediaGrid>
+      </section>
 
       <footer className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-border/50 pt-6 text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
         <span>Create · Explore · Evolve</span>
