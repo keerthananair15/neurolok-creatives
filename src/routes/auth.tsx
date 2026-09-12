@@ -173,13 +173,13 @@ function AuthPage() {
 
           {/* Card Top Sub-Header */}
           <div className="mb-8 flex items-center justify-between text-[11px] font-medium text-white/60">
-            <span>Liquid Glass</span>
+
             <button
               type="button"
               onClick={() => toast.info("Neurolok AI Studio v2.4 — Plain language creative engine.")}
               className="transition-colors hover:text-emerald-400"
             >
-              Tutorial
+
             </button>
           </div>
 
