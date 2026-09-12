@@ -110,6 +110,7 @@ function SidebarBody({ onNavigate }: { onNavigate?: (() => void) | undefined }) 
 
 export function AppShell({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
+  const path = useRouterState({ select: (s) => s.location.pathname });
 
   return (
     <div className="min-h-screen bg-background">
@@ -118,7 +119,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(80%_50%_at_50%_-10%,var(--glow),transparent_65%)]"
       />
 
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-60 border-r border-sidebar-border bg-sidebar lg:block">
+      <aside className="sidebar-liquid fixed inset-y-0 left-0 z-30 hidden w-60 overflow-hidden border-r border-sidebar-border lg:block">
         <SidebarBody />
       </aside>
 
@@ -129,7 +130,7 @@ export function AppShell({ children }: { children: ReactNode }) {
               <Menu className="size-5" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-64 border-sidebar-border bg-sidebar p-0">
+          <SheetContent side="left" className="sidebar-liquid w-64 overflow-hidden border-sidebar-border p-0">
             <SheetTitle className="sr-only">Menu</SheetTitle>
             <SidebarBody onNavigate={() => setOpen(false)} />
           </SheetContent>
@@ -138,7 +139,11 @@ export function AppShell({ children }: { children: ReactNode }) {
         <span className="w-9" />
       </header>
 
-      <main className="lg:pl-60">{children}</main>
+      <main className="lg:pl-60">
+        <div key={path} className="route-enter">
+          {children}
+        </div>
+      </main>
     </div>
   );
 }

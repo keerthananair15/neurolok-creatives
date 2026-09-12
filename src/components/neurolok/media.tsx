@@ -31,9 +31,6 @@ export function MediaTile({
           <Play className="size-3 fill-primary text-primary" /> Video
         </span>
       )}
-      <span className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 bg-gradient-to-t from-background/95 to-transparent p-3 pt-10 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-        <span className="line-clamp-2 text-xs text-muted-foreground">{asset.prompt}</span>
-      </span>
     </button>
   );
 }
