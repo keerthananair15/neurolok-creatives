@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable/index";
 import sample from "@/assets/sample-1.jpg";
 
 export const Route = createFileRoute("/auth")({
@@ -58,18 +57,6 @@ function AuthPage() {
       if (error) return toast.error(error.message);
       navigate({ to: "/home" });
     }
-  }
-
-  async function google() {
-    const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin,
-    });
-    if (result.error) {
-      toast.error("Google sign-in failed. Try email instead.");
-      return;
-    }
-    if (result.redirected) return;
-    navigate({ to: "/home" });
   }
 
   return (
@@ -136,14 +123,6 @@ function AuthPage() {
                   {mode === "signin" ? "Sign in" : "Create account"}
                 </Button>
               </form>
-
-              <div className="my-6 flex items-center gap-3 text-xs text-muted-foreground">
-                <span className="h-px flex-1 bg-border" /> or <span className="h-px flex-1 bg-border" />
-              </div>
-
-              <Button variant="outline" className="w-full" onClick={google}>
-                Continue with Google
-              </Button>
 
               <button
                 onClick={() => setMode(mode === "signin" ? "signup" : "signin")}
