@@ -10,9 +10,6 @@ import { lovable } from "@/integrations/lovable/index";
 import sample from "@/assets/sample-1.jpg";
 
 export const Route = createFileRoute("/auth")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    mode: search["mode"] === "signup" ? ("signup" as const) : ("signin" as const),
-  }),
   head: () => ({
     meta: [
       { title: "Sign in — Neurolok AI Creative Studio" },
@@ -22,8 +19,6 @@ export const Route = createFileRoute("/auth")({
       },
       { property: "og:title", content: "Sign in — Neurolok" },
       { property: "og:description", content: "Your AI creative studio. Bring an idea, leave with finished work." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: AuthPage,
@@ -31,8 +26,7 @@ export const Route = createFileRoute("/auth")({
 
 function AuthPage() {
   const navigate = useNavigate();
-  const search = Route.useSearch();
-  const [mode, setMode] = useState<"signin" | "signup">(search.mode);
+  const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -41,7 +35,7 @@ function AuthPage() {
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
-      if (data.user) navigate({ to: "/create" });
+      if (data.user) navigate({ to: "/home" });
     });
   }, [navigate]);
 
@@ -57,25 +51,25 @@ function AuthPage() {
       setBusy(false);
       if (error) return toast.error(error.message);
       if (!data.session) return setSent(true);
-      navigate({ to: "/create" });
+      navigate({ to: "/home" });
     } else {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       setBusy(false);
       if (error) return toast.error(error.message);
-      navigate({ to: "/create" });
+      navigate({ to: "/home" });
     }
   }
 
   async function google() {
     const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: `${window.location.origin}/auth`,
+      redirect_uri: window.location.origin,
     });
     if (result.error) {
       toast.error("Google sign-in failed. Try email instead.");
       return;
     }
     if (result.redirected) return;
-    navigate({ to: "/create" });
+    navigate({ to: "/home" });
   }
 
   return (

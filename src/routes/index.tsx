@@ -1,20 +1,37 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { LandingPage } from "@/components/neurolok/landing-page";
+import { useEffect } from "react";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { supabase } from "@/integrations/supabase/client";
+import { Logo } from "@/components/neurolok/logo";
 
 export const Route = createFileRoute("/")({
+  ssr: false,
   head: () => ({
     meta: [
-      { title: "Neurolok — Create Images, Videos & Campaigns" },
+      { title: "Neurolok — Turn an idea into finished creative" },
       {
         name: "description",
         content:
-          "Turn a simple idea into stunning images, cinematic videos and complete campaigns with Neurolok's AI creative intelligence.",
+          "Neurolok is an AI creative studio for images, videos, storyboards, characters and ad campaigns — described in plain language.",
       },
       { property: "og:title", content: "Neurolok — AI Creative Studio" },
-      { property: "og:description", content: "Bring the idea. Neurolok turns it into extraordinary creative." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:description", content: "Bring an idea. Leave with finished work." },
     ],
   }),
-  component: LandingPage,
+  component: Index,
 });
+
+function Index() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      navigate({ to: data.user ? "/home" : "/auth", replace: true });
+    });
+  }, [navigate]);
+
+  return (
+    <div className="ambient-glow flex min-h-screen items-center justify-center bg-background">
+      <Logo size={44} />
+    </div>
+  );
+}
