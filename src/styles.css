@@ -172,6 +172,22 @@
   }
 }
 
+/* Translucent sculptural form behind the home preview stack. */
+@utility hero-liquid {
+  border-radius: 46% 54% 58% 42% / 38% 42% 58% 62%;
+  background:
+    radial-gradient(circle at 30% 22%, oklch(1 0 0 / 92%), transparent 28%),
+    radial-gradient(circle at 72% 68%, oklch(0.64 0.12 154 / 18%), transparent 42%),
+    linear-gradient(145deg, oklch(1 0 0 / 66%), oklch(0.91 0.025 150 / 42%));
+  border: 1px solid oklch(1 0 0 / 90%);
+  box-shadow:
+    inset 18px 18px 48px oklch(1 0 0 / 72%),
+    inset -20px -24px 56px oklch(0.56 0.12 154 / 10%),
+    0 36px 90px -56px oklch(0.25 0.025 155 / 34%);
+  filter: saturate(108%);
+  transform: rotate(-7deg);
+}
+
 @utility glow-ring {
   box-shadow:
     0 0 0 1px oklch(0.55 0.16 154 / 18%),
