@@ -22,7 +22,7 @@ export function Logo({
       />
       {withWordmark && (
         <span
-          className="font-display text-[0.95rem] font-medium tracking-[0.34em] text-foreground"
+          className="font-display text-[0.95rem] font-semibold tracking-[0.28em] text-foreground"
           style={{ fontSize: size * 0.42 }}
         >
           NEUROL<span className="text-primary">OK</span>
