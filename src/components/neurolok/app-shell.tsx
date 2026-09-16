@@ -42,10 +42,10 @@ function NavLinks({ onNavigate }: { onNavigate?: (() => void) | undefined }) {
             to={to}
             onClick={onNavigate}
             className={cn(
-              "group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors",
+              "group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-all duration-300",
               active
-                ? "bg-sidebar-accent text-foreground"
-                : "text-muted-foreground hover:bg-sidebar-accent/60 hover:text-foreground",
+                ? "bg-sidebar-accent text-sidebar-accent-foreground shadow-sm ring-1 ring-primary/10"
+                : "text-muted-foreground hover:bg-sidebar-accent/55 hover:text-foreground",
             )}
           >
             <Icon
@@ -73,7 +73,7 @@ function SidebarBody({ onNavigate }: { onNavigate?: (() => void) | undefined }) 
       <NavLinks onNavigate={onNavigate} />
 
       <div className="mt-auto flex flex-col gap-3">
-        <div className="card-premium px-3.5 py-3">
+        <div className="glass rounded-xl px-3.5 py-3">
           <p className="font-display text-lg text-foreground">
             {(profile?.credits ?? 0).toLocaleString()}
           </p>
@@ -84,7 +84,7 @@ function SidebarBody({ onNavigate }: { onNavigate?: (() => void) | undefined }) 
         <Link
           to="/settings"
           onClick={onNavigate}
-          className="flex items-center gap-3 rounded-xl border border-border/60 px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          className="flex items-center gap-3 rounded-lg border border-border/70 bg-card/55 px-3 py-2.5 text-sm text-muted-foreground transition-all hover:border-primary/20 hover:text-foreground hover:shadow-sm"
         >
           <SettingsIcon className="size-[18px]" strokeWidth={1.6} />
           <span className="truncate">
@@ -119,7 +119,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(80%_50%_at_50%_-10%,var(--glow),transparent_65%)]"
       />
 
-      <aside className="sidebar-liquid fixed inset-y-0 left-0 z-30 hidden w-60 overflow-hidden border-r border-sidebar-border lg:block">
+      <aside className="sidebar-liquid fixed inset-y-0 left-0 z-30 hidden w-60 overflow-hidden border-r border-sidebar-border/80 lg:block">
         <SidebarBody />
       </aside>
 

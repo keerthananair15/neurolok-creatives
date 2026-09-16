@@ -76,14 +76,14 @@ function AuthPage() {
     <div className="grid min-h-screen lg:grid-cols-2">
       <div className="relative hidden lg:block">
         <img src={sample} alt="" className="absolute inset-0 size-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-foreground/75 via-foreground/15 to-transparent" />
         <div className="absolute bottom-12 left-12 right-12">
-          <p className="font-display text-3xl leading-tight text-gradient-green">
+          <p className="font-display text-3xl font-medium leading-tight text-primary-foreground">
             Bring an idea.
             <br />
             Leave with finished work.
           </p>
-          <p className="mt-3 max-w-sm text-sm text-muted-foreground">
+          <p className="mt-3 max-w-sm text-sm text-primary-foreground/80">
             Images, videos, storyboards and full ad campaigns — written in plain language, no prompt
             skills needed.
           </p>

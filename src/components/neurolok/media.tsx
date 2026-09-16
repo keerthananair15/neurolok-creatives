@@ -15,7 +15,7 @@ export function MediaTile({
     <button
       onClick={onClick}
       className={cn(
-        "group relative w-full overflow-hidden rounded-3xl border border-border/50 bg-card text-left transition-all duration-500 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:border-primary/40 hover:glow-ring",
+        "group relative w-full overflow-hidden rounded-2xl border border-border/70 bg-card text-left shadow-[0_18px_50px_-36px_oklch(0.25_0.025_155/38%)] transition-all duration-500 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_24px_58px_-34px_oklch(0.25_0.025_155/42%)]",
         className,
       )}
     >
@@ -25,9 +25,9 @@ export function MediaTile({
         loading="lazy"
         className="aspect-[4/5] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
       />
-      <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent opacity-70" />
+      <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-foreground/20 via-transparent to-transparent opacity-60" />
       {asset.kind === "video" && (
-        <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-background/60 px-2.5 py-1 text-[11px] text-foreground backdrop-blur-md">
+        <span className="glass absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] text-foreground">
           <Play className="size-3 fill-primary text-primary" /> Video
         </span>
       )}
@@ -54,7 +54,7 @@ export function EmptyState({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="glass flex flex-col items-center rounded-3xl px-6 py-16 text-center">
+    <div className="glass flex flex-col items-center rounded-2xl px-6 py-16 text-center">
       <p className="font-display text-lg text-foreground">{title}</p>
       <p className="mt-2 max-w-sm text-sm text-muted-foreground">{hint}</p>
       {action && <div className="mt-6">{action}</div>}

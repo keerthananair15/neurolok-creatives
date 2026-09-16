@@ -51,26 +51,26 @@ const MORE = [
 function HeroStack() {
   return (
     <div className="relative hidden h-[420px] lg:block" aria-hidden>
-      <div className="pointer-events-none absolute -right-10 top-4 size-[420px] rounded-full bg-[radial-gradient(closest-side,var(--glow),transparent)] blur-2xl" />
+      <div className="hero-liquid pointer-events-none absolute -right-8 top-2 size-[410px]" />
 
-      <figure className="absolute left-0 top-6 w-[44%] rotate-[-4deg] overflow-hidden rounded-3xl border border-white/10 opacity-70 shadow-[0_30px_80px_-40px_oklch(0_0_0/80%)] transition-transform duration-700 hover:rotate-[-2deg]">
+      <figure className="absolute left-0 top-6 w-[44%] rotate-[-4deg] overflow-hidden rounded-2xl border border-border/70 bg-card opacity-80 shadow-[0_26px_70px_-38px_oklch(0.25_0.025_155/42%)] transition-transform duration-700 hover:rotate-[-2deg]">
         <img src={SAMPLE_MEDIA[2]} alt="" className="aspect-[3/4] w-full object-cover" loading="lazy" />
       </figure>
 
-      <figure className="absolute right-0 top-0 w-[56%] overflow-hidden rounded-[2rem] border border-white/12 shadow-[0_50px_120px_-50px_oklch(0.84_0.21_150/45%)]">
+      <figure className="absolute right-0 top-0 w-[56%] overflow-hidden rounded-2xl border border-border/60 bg-card shadow-[0_38px_90px_-42px_oklch(0.25_0.025_155/48%)]">
         <img src={SAMPLE_MEDIA[1]} alt="" className="aspect-[4/5] w-full object-cover" loading="lazy" />
-        <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/95 to-transparent p-5 pt-16">
-          <p className="font-display text-xs uppercase leading-5 tracking-[0.32em] text-foreground/90">
+        <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-foreground/70 to-transparent p-5 pt-16">
+          <p className="font-display text-xs uppercase leading-5 tracking-[0.32em] text-primary-foreground">
             Visions without limits
           </p>
         </figcaption>
       </figure>
 
-      <figure className="glass absolute bottom-2 left-2 w-[46%] overflow-hidden rounded-3xl p-1.5">
+      <figure className="glass absolute bottom-2 left-2 w-[46%] overflow-hidden rounded-2xl p-1.5 shadow-[0_22px_55px_-34px_oklch(0.25_0.025_155/45%)]">
         <img
           src={SAMPLE_MEDIA[4]}
           alt=""
-          className="aspect-[16/10] w-full rounded-[1.35rem] object-cover"
+          className="aspect-[16/10] w-full rounded-xl object-cover"
           loading="lazy"
         />
         <span className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-background/70 px-2.5 py-1 text-[11px] text-foreground backdrop-blur-md">
@@ -112,7 +112,7 @@ function HomePage() {
           <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
             Ideas into reality
           </p>
-          <h1 className="mt-5 font-display text-[2.6rem] leading-[1.03] tracking-tight text-foreground sm:text-6xl">
+          <h1 className="mt-5 font-display text-[2.6rem] font-medium leading-[1.03] text-foreground sm:text-6xl">
             What are you
             <br />
             <span className="text-gradient-green">creating</span>{" "}
