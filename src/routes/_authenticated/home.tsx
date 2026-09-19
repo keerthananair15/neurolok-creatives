@@ -1,8 +1,9 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { ArrowRight, Clapperboard, ImageIcon, Megaphone, Play, TrendingUp, Users, Video } from "lucide-react";
+import { ArrowRight, Clapperboard, ImageIcon, Megaphone, Play, TrendingUp, Users, Video, Wand2, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { Composer, emptyComposer } from "@/components/neurolok/composer";
 import { MediaGrid, MediaTile, Page, SectionHeading } from "@/components/neurolok/media";
+import { InteractiveNeuralSphere } from "@/components/neurolok/interactive-neural-sphere";
 import { EXAMPLE_IDEAS, SAMPLE_MEDIA } from "@/lib/studio";
 import { useAssets, useProfile } from "@/lib/db";
 
@@ -18,27 +19,41 @@ export const Route = createFileRoute("/_authenticated/home")({
   component: HomePage,
 });
 
-const QUICK = [
+const MAJOR_CREATION_CARDS = [
   {
     to: "/create",
     label: "Create Image",
-    hint: "Stunning visuals from your ideas.",
+    hint: "Generate ultra-high definition photorealistic visual stills, portraits, and concept art from plain language.",
     icon: ImageIcon,
+    badge: "Image Studio",
+    cta: "Start Image",
     art: 0,
   },
-  { to: "/create", label: "Create Video", hint: "Cinematic videos in seconds.", icon: Video, art: 1 },
+  {
+    to: "/create",
+    label: "Create Video",
+    hint: "Synthesize cinematic motion sequences and camera moves with state-of-the-art video rendering.",
+    icon: Video,
+    badge: "Cinematic Motion",
+    cta: "Start Video",
+    art: 1,
+  },
   {
     to: "/campaigns",
     label: "Create Campaign",
-    hint: "One product. A complete campaign.",
+    hint: "Transform one product concept into a complete multi-channel advertisement package and asset suite.",
     icon: Megaphone,
+    badge: "Multi-Asset Suite",
+    cta: "Launch Campaign",
     art: 2,
   },
   {
     to: "/storyboard",
     label: "Create Storyboard",
-    hint: "Turn your concept into a visual story.",
+    hint: "Turn script concepts and narrative ideas into scene-by-scene visual storyboards.",
     icon: Clapperboard,
+    badge: "Narrative Flow",
+    cta: "Build Storyboard",
     art: 3,
   },
 ] as const;
@@ -47,40 +62,6 @@ const MORE = [
   { to: "/characters", label: "Reusable characters", icon: Users },
   { to: "/trends", label: "Recreate a trend", icon: TrendingUp },
 ] as const;
-
-function HeroStack() {
-  return (
-    <div className="relative hidden h-[420px] lg:block" aria-hidden>
-      <div className="pointer-events-none absolute -right-10 top-4 size-[420px] rounded-full bg-[radial-gradient(closest-side,var(--glow),transparent)] blur-2xl" />
-
-      <figure className="absolute left-0 top-6 w-[44%] rotate-[-4deg] overflow-hidden rounded-3xl border border-white/10 opacity-70 shadow-[0_30px_80px_-40px_oklch(0_0_0/80%)] transition-transform duration-700 hover:rotate-[-2deg]">
-        <img src={SAMPLE_MEDIA[2]} alt="" className="aspect-[3/4] w-full object-cover" loading="lazy" />
-      </figure>
-
-      <figure className="absolute right-0 top-0 w-[56%] overflow-hidden rounded-[2rem] border border-white/12 shadow-[0_50px_120px_-50px_oklch(0.84_0.21_150/45%)]">
-        <img src={SAMPLE_MEDIA[1]} alt="" className="aspect-[4/5] w-full object-cover" loading="lazy" />
-        <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/95 to-transparent p-5 pt-16">
-          <p className="font-display text-xs uppercase leading-5 tracking-[0.32em] text-foreground/90">
-            Visions without limits
-          </p>
-        </figcaption>
-      </figure>
-
-      <figure className="glass absolute bottom-2 left-2 w-[46%] overflow-hidden rounded-3xl p-1.5">
-        <img
-          src={SAMPLE_MEDIA[4]}
-          alt=""
-          className="aspect-[16/10] w-full rounded-[1.35rem] object-cover"
-          loading="lazy"
-        />
-        <span className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-background/70 px-2.5 py-1 text-[11px] text-foreground backdrop-blur-md">
-          <Play className="size-3 fill-primary text-primary" /> 0:08
-        </span>
-      </figure>
-
-    </div>
-  );
-}
 
 function HomePage() {
   const navigate = useNavigate();
@@ -107,6 +88,7 @@ function HomePage() {
 
   return (
     <Page>
+      {/* HERO SECTION WITH INTERACTIVE 3D NEURAL SPHERE */}
       <section className="ambient-glow mb-14 grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
         <div>
           <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
@@ -119,7 +101,7 @@ function HomePage() {
             {first ? `today, ${first}?` : "today?"}
           </h1>
           <p className="mt-5 max-w-md text-sm leading-relaxed text-muted-foreground sm:text-base">
-            Turn your ideas into stunning images, videos and campaigns. No complex prompts — just
+            Turn your ideas into finished images, videos and campaigns. No complex prompts — just
             describe it.
           </p>
 
@@ -140,39 +122,53 @@ function HomePage() {
           </div>
         </div>
 
-        <HeroStack />
+        {/* Replaced static collage with Interactive 3D Neural Sphere */}
+        <InteractiveNeuralSphere />
       </section>
 
-      <div className="mb-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {QUICK.map(({ to, label, hint, icon: Icon, art }) => (
-          <Link key={label} to={to} className="card-premium edge-light group overflow-hidden">
-            <div className="flex items-stretch">
-              <div className="flex flex-1 flex-col justify-between p-5">
-                <div>
-                  <Icon className="size-[18px] text-primary" strokeWidth={1.6} />
-                  <p className="mt-3 whitespace-nowrap font-display text-[0.95rem] text-foreground">
-                    {label}
-                  </p>
-                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{hint}</p>
-                </div>
-                <span className="mt-5 inline-flex size-8 items-center justify-center rounded-full border border-border/70 text-muted-foreground transition-all duration-300 group-hover:border-primary/50 group-hover:text-primary">
-                  <ArrowRight className="size-4" />
-                </span>
-              </div>
-              <div className="relative w-[32%] shrink-0 overflow-hidden">
-                <img
-                  src={SAMPLE_MEDIA[art]}
-                  alt=""
-                  aria-hidden
-                  loading="lazy"
-                  className="h-full w-full object-cover opacity-70 transition-all duration-700 group-hover:scale-105 group-hover:opacity-90"
-                />
-                <span className="absolute inset-0 bg-gradient-to-r from-card via-card/40 to-transparent" />
-              </div>
-            </div>
+      {/* 2 x 2 GRID OF LARGE PREMIUM CREATION CARDS */}
+      <div className="mb-10">
+        <div className="mb-4 flex items-center justify-between">
+          <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Creation Tools</p>
+        </div>
 
-          </Link>
-        ))}
+        <div className="grid gap-6 sm:grid-cols-2">
+          {MAJOR_CREATION_CARDS.map(({ to, label, hint, icon: Icon, badge, cta, art }) => (
+            <Link
+              key={label}
+              to={to}
+              className="card-premium liquid-hover group relative overflow-hidden rounded-[2rem] border border-border/80 bg-card p-6 shadow-md shadow-slate-200/50 dark:border-primary/20 dark:bg-surface/60 dark:shadow-none sm:p-7"
+            >
+              {/* Background Art Preview Overlay */}
+              <div className="absolute top-0 right-0 h-full w-[45%] overflow-hidden opacity-20 transition-all duration-700 group-hover:scale-105 group-hover:opacity-40 dark:opacity-30 dark:group-hover:opacity-50">
+                <img src={SAMPLE_MEDIA[art]} alt="" className="h-full w-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-r from-card via-card/80 to-transparent" />
+              </div>
+
+              <div className="relative z-10 flex flex-col justify-between h-full min-h-[160px]">
+                <div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex size-11 items-center justify-center rounded-2xl border border-primary/40 bg-primary/10 text-primary shadow-sm">
+                      <Icon className="size-5" />
+                    </div>
+                    <span className="rounded-full border border-border bg-secondary/90 px-3 py-1 text-[10px] font-medium text-foreground backdrop-blur-md">
+                      {badge}
+                    </span>
+                  </div>
+
+                  <h3 className="mt-5 font-display text-xl font-medium text-foreground">{label}</h3>
+                  <p className="mt-2 max-w-sm text-xs leading-relaxed text-muted-foreground font-normal">{hint}</p>
+                </div>
+
+                <div className="mt-6 flex items-center justify-between pt-2">
+                  <span className="inline-flex items-center gap-2 text-xs font-semibold text-primary transition-transform group-hover:translate-x-1">
+                    {cta} <ArrowRight className="size-4" />
+                  </span>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
 
       <div className="mb-14 flex flex-wrap gap-3">
@@ -200,7 +196,7 @@ function HomePage() {
           }
         />
         <MediaGrid>
-          {recentCreations.map((asset, index) => {
+          {recentCreations.map((asset) => {
             const isSample = asset.id.startsWith("sample-");
             return (
               <div key={asset.id} className="creation-item">

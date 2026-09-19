@@ -87,13 +87,15 @@ function CreatePage() {
   return (
     <Page>
       <div className="mb-6 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
-        <span className="glass rounded-full px-3 py-1.5">
-          {profile?.credits ?? 0} credits left
+        <span className="glass rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3.5 py-1.5 font-medium text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.15)]">
+          ⚡ {profile?.credits ?? 0} credits left
         </span>
-        <span className="glass rounded-full px-3 py-1.5">
-          This {value.kind} costs {cost}
+        <span className="glass rounded-full border border-white/10 px-3.5 py-1.5 text-white/80">
+          This {value.kind} costs {cost} credits
         </span>
-        <span className="glass rounded-full px-3 py-1.5">Model: {model}</span>
+        <span className="glass rounded-full border border-white/10 px-3.5 py-1.5 text-white/80">
+          Model: <span className="text-emerald-400 font-medium">{model}</span>
+        </span>
       </div>
 
       {!!refs.length && (

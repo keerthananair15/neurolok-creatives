@@ -1,13 +1,11 @@
-import { useEffect } from "react";
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { supabase } from "@/integrations/supabase/client";
-import { Logo } from "@/components/neurolok/logo";
+import { createFileRoute } from "@tanstack/react-router";
+import { LandingExplorePage } from "@/components/neurolok/landing-explore";
 
 export const Route = createFileRoute("/")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "Neurolok — Turn an idea into finished creative" },
+      { title: "Neurolok — Create Anything with AI" },
       {
         name: "description",
         content:
@@ -17,21 +15,6 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "Bring an idea. Leave with finished work." },
     ],
   }),
-  component: Index,
+  component: LandingExplorePage,
 });
 
-function Index() {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => {
-      navigate({ to: data.user ? "/home" : "/auth", replace: true });
-    });
-  }, [navigate]);
-
-  return (
-    <div className="ambient-glow flex min-h-screen items-center justify-center bg-background">
-      <Logo size={44} />
-    </div>
-  );
-}

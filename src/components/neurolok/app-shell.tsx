@@ -11,6 +11,8 @@ import {
   TrendingUp,
   Users,
   Settings as SettingsIcon,
+  Sun,
+  Moon,
 } from "lucide-react";
 import { Logo } from "./logo";
 import { AskSuggestion } from "./ask-suggestion";
@@ -19,6 +21,7 @@ import { useProfile } from "@/lib/db";
 import { supabase } from "@/integrations/supabase/client";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import { useTheme } from "@/hooks/use-theme";
 
 const NAV = [
   { to: "/home", label: "Home", icon: Home },
@@ -44,7 +47,7 @@ function NavLinks({ onNavigate }: { onNavigate?: (() => void) | undefined }) {
             className={cn(
               "group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors",
               active
-                ? "bg-sidebar-accent text-foreground"
+                ? "bg-sidebar-accent text-foreground font-medium shadow-sm"
                 : "text-muted-foreground hover:bg-sidebar-accent/60 hover:text-foreground",
             )}
           >
@@ -63,12 +66,27 @@ function NavLinks({ onNavigate }: { onNavigate?: (() => void) | undefined }) {
 function SidebarBody({ onNavigate }: { onNavigate?: (() => void) | undefined }) {
   const { data: profile } = useProfile();
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <div className="flex h-full flex-col gap-6 px-4 py-5">
-      <Link to="/home" onClick={onNavigate} className="px-1">
-        <Logo size={34} />
-      </Link>
+      <div className="flex items-center justify-between px-1">
+        <Link to="/home" onClick={onNavigate}>
+          <Logo size={34} />
+        </Link>
+        <button
+          type="button"
+          onClick={toggleTheme}
+          aria-label="Toggle theme"
+          className="flex size-9 items-center justify-center rounded-xl border border-border/60 bg-surface/50 text-foreground transition-all hover:border-primary/50 hover:bg-surface"
+        >
+          {theme === "dark" ? (
+            <Sun className="size-4 text-emerald-400" />
+          ) : (
+            <Moon className="size-4 text-emerald-600" />
+          )}
+        </button>
+      </div>
 
       <NavLinks onNavigate={onNavigate} />
 
@@ -81,16 +99,26 @@ function SidebarBody({ onNavigate }: { onNavigate?: (() => void) | undefined }) 
         </div>
         <AskSuggestion />
 
-        <Link
-          to="/settings"
-          onClick={onNavigate}
-          className="flex items-center gap-3 rounded-xl border border-border/60 px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-        >
-          <SettingsIcon className="size-[18px]" strokeWidth={1.6} />
-          <span className="truncate">
-            {profile?.display_name ?? "Account"}
-          </span>
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link
+            to="/settings"
+            onClick={onNavigate}
+            className="flex flex-1 items-center gap-3 rounded-xl border border-border/60 px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground hover:border-primary/40"
+          >
+            <SettingsIcon className="size-[18px]" strokeWidth={1.6} />
+            <span className="truncate">
+              {profile?.display_name ?? "Account"}
+            </span>
+          </Link>
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="flex h-10 px-3 items-center justify-center rounded-xl border border-border/60 text-xs font-medium text-muted-foreground transition-all hover:border-primary/40 hover:text-foreground"
+          >
+            {theme === "dark" ? "Light" : "Dark"}
+          </button>
+        </div>
+
         <Button
           variant="ghost"
           size="sm"
@@ -111,9 +139,10 @@ function SidebarBody({ onNavigate }: { onNavigate?: (() => void) | undefined }) 
 export function AppShell({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const path = useRouterState({ select: (s) => s.location.pathname });
+  const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
       <div
         aria-hidden
         className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(80%_50%_at_50%_-10%,var(--glow),transparent_65%)]"
@@ -136,7 +165,14 @@ export function AppShell({ children }: { children: ReactNode }) {
           </SheetContent>
         </Sheet>
         <Logo size={28} />
-        <span className="w-9" />
+        <button
+          type="button"
+          onClick={toggleTheme}
+          aria-label="Toggle theme"
+          className="flex size-9 items-center justify-center rounded-xl border border-border/60 bg-surface/50 text-foreground"
+        >
+          {theme === "dark" ? <Sun className="size-4 text-emerald-400" /> : <Moon className="size-4 text-emerald-600" />}
+        </button>
       </header>
 
       <main className="lg:pl-60">

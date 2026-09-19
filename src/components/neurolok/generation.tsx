@@ -1,28 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { STAGES } from "@/lib/studio";
-import { Progress } from "@/components/ui/progress";
+import { NeuralAnimation } from "./neural-animation";
 
-/** Calm, human-readable progress while results are being produced. */
+/** Premium Neurolok neural processing animation while results are being produced. */
 export function GenerationStages({ label = "Creating" }: { label?: string }) {
-  const [step, setStep] = useState(0);
-
-  useEffect(() => {
-    const t = setInterval(() => setStep((s) => Math.min(s + 1, STAGES.length - 1)), 900);
-    return () => clearInterval(t);
-  }, []);
-
-  const pct = ((step + 1) / STAGES.length) * 100;
-
-  return (
-    <div className="glass mx-auto w-full max-w-md rounded-3xl p-6 text-center">
-      <p className="font-display text-base text-foreground">{label}…</p>
-      <p className="mt-1 text-sm text-primary">{STAGES[step]}</p>
-      <Progress value={pct} className="mt-5 h-1.5" />
-      <p className="mt-4 text-xs text-muted-foreground">
-        This usually takes under a minute. You can keep browsing.
-      </p>
-    </div>
-  );
+  return <NeuralAnimation label={label} />;
 }
 
 export function useSimulatedRun(ms = 3600) {
