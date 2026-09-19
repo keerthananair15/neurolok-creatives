@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { ArrowRight, Clapperboard, ImageIcon, Megaphone, Play, TrendingUp, Users, Video, Wand2, Sparkles } from "lucide-react";
+import { ArrowRight, Clapperboard, ImageIcon, Megaphone, TrendingUp, Users, Video } from "lucide-react";
 import { useState } from "react";
 import { Composer, emptyComposer } from "@/components/neurolok/composer";
 import { MediaGrid, MediaTile, Page, SectionHeading } from "@/components/neurolok/media";
@@ -77,7 +77,8 @@ function HomePage() {
       kind: index === 0 ? ("video" as const) : ("image" as const),
     }));
 
-  const first = profile?.display_name?.split(" ")[0];
+  const rawFirst = profile?.display_name?.split(" ")[0];
+  const creatorName = rawFirst && !rawFirst.toLowerCase().includes("demo") ? rawFirst : "Creator";
 
   function start(kind?: "image" | "video") {
     navigate({
@@ -88,17 +89,23 @@ function HomePage() {
 
   return (
     <Page>
-      {/* HERO SECTION WITH INTERACTIVE 3D NEURAL SPHERE */}
-      <section className="ambient-glow mb-14 grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+      {/* HERO SECTION WITH FAINT EMERALD SPOTLIGHT & INTERACTIVE 3D AI CORE */}
+      <section className="relative mb-14 grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+        {/* Faint Emerald Spotlight Connecting Left & Right Sides */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -inset-x-12 -top-20 bottom-0 -z-10 bg-[radial-gradient(ellipse_at_center,var(--glow),transparent_70%)] blur-3xl opacity-90"
+        />
+
         <div>
-          <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
+          <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground font-semibold">
             Ideas into reality
           </p>
           <h1 className="mt-5 font-display text-[2.6rem] leading-[1.03] tracking-tight text-foreground sm:text-6xl">
             What are you
             <br />
-            <span className="text-gradient-green">creating</span>{" "}
-            {first ? `today, ${first}?` : "today?"}
+            <span className="text-gradient-green font-medium">creating</span>{" "}
+            {creatorName ? `today, ${creatorName}?` : "today?"}
           </h1>
           <p className="mt-5 max-w-md text-sm leading-relaxed text-muted-foreground sm:text-base">
             Turn your ideas into finished images, videos and campaigns. No complex prompts — just
@@ -122,14 +129,14 @@ function HomePage() {
           </div>
         </div>
 
-        {/* Replaced static collage with Interactive 3D Neural Sphere */}
+        {/* Replaced static collage with Interactive 3D Neurolok AI Core */}
         <InteractiveNeuralSphere />
       </section>
 
       {/* 2 x 2 GRID OF LARGE PREMIUM CREATION CARDS */}
       <div className="mb-10">
         <div className="mb-4 flex items-center justify-between">
-          <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Creation Tools</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground font-semibold">Creation Tools</p>
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2">
@@ -137,12 +144,18 @@ function HomePage() {
             <Link
               key={label}
               to={to}
-              className="card-premium liquid-hover group relative overflow-hidden rounded-[2rem] border border-border/80 bg-card p-6 shadow-md shadow-slate-200/50 dark:border-primary/20 dark:bg-surface/60 dark:shadow-none sm:p-7"
+              className="card-premium liquid-hover group relative overflow-hidden rounded-[2rem] border border-border/80 bg-card p-6 shadow-md shadow-slate-200/50 dark:border-primary/25 dark:bg-surface/70 dark:shadow-[0_20px_50px_-20px_rgba(16,185,129,0.15)] sm:p-7"
             >
+              {/* Stronger Glass Reflection Overlay */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-emerald-400/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+              />
+
               {/* Background Art Preview Overlay */}
-              <div className="absolute top-0 right-0 h-full w-[45%] overflow-hidden opacity-20 transition-all duration-700 group-hover:scale-105 group-hover:opacity-40 dark:opacity-30 dark:group-hover:opacity-50">
+              <div className="absolute top-0 right-0 h-full w-[45%] overflow-hidden opacity-25 transition-all duration-700 group-hover:scale-105 group-hover:opacity-45 dark:opacity-35 dark:group-hover:opacity-55">
                 <img src={SAMPLE_MEDIA[art]} alt="" className="h-full w-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-r from-card via-card/80 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-card via-card/85 to-transparent" />
               </div>
 
               <div className="relative z-10 flex flex-col justify-between h-full min-h-[160px]">

@@ -73,7 +73,7 @@ export function Composer({
         }}
         className={cn(
           "resize-none border-0 bg-transparent px-2 text-base shadow-none focus-visible:ring-0",
-          compact ? "min-h-14" : "min-h-24",
+          compact ? "min-h-20" : "min-h-32 leading-relaxed",
         )}
       />
 
